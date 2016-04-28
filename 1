@@ -1,0 +1,138 @@
+#include <iostream>
+#include <fstream>
+#include <time.h>
+#include <string>
+#include <Windows.h>
+
+using namespace std;
+
+
+int main()
+{
+int a=0, b=0, c=0, d=0, so, sm;
+SYSTEMTIME st;
+GetSystemTime(&st);
+time_t rawtime;
+struct tm * timeinfo, Z;
+    fstream f;
+
+        if(st.wMonth == 1)
+    {
+        f.open("Ianuarie.txt",ios::app);
+    }
+        if(st.wMonth == 2)
+    {
+        f.open("Februarie.txt",ios::app);
+    }
+        if(st.wMonth == 3)
+    {
+        f.open("Martie.txt",ios::app);
+    }
+        if(st.wMonth == 4)
+    {
+        f.open("Aprilie.txt",ios::app);
+    }
+        if(st.wMonth == 5)
+    {
+        f.open("Mai.txt",ios::app);
+    }
+        if(st.wMonth == 6)
+    {
+        f.open("Iunie.txt",ios::app);
+    }
+        if(st.wMonth == 7)
+    {
+        f.open("Iulie.txt",ios::app);
+    }
+        if(st.wMonth == 8)
+    {
+        f.open("August.txt",ios::app);
+    }
+        if(st.wMonth == 9)
+    {
+        f.open("Septembrie.txt",ios::app);
+    }
+        if(st.wMonth == 10)
+    {
+        f.open("Octombrie.txt",ios::app);
+    }
+        if(st.wMonth == 11)
+    {
+        f.open("Noiembrie.txt",ios::app);
+    }
+        if(st.wMonth == 12)
+    {
+        f.open("Decembrie.txt",ios::app);
+    }
+
+
+    int meniu;
+bool exit = false;
+
+cout << "NU OPRI PROGRAMUL PANA NU IESI DE LA MUNCA!"<< endl;//Don't stop the program!
+cout << "Apasa unul din urmatoarele numere urmat de tasta Enter: " << endl;
+cout << "1 - Daca ai ajuns acum." << endl;//If you come now.
+cout << "2 - Daca pleci acum. " << endl;//If you leave now.
+cout << "3 - Iesire din program. " << endl;//Quit the program.
+cout << "NU OPRI PROGRAMUL PANA NU IESI DE LA MUNCA!"<< endl;//Don't stop the program!
+
+        do {
+
+        cin >> meniu;
+
+        if(meniu==1)
+        {
+        a=Z.tm_hour;
+        c=Z.tm_min;
+        }
+        else
+        {
+          if(meniu==2)
+          {
+          b=Z.tm_hour;
+          d=Z.tm_min;
+          }
+        }
+        switch (meniu) {
+            case 1:
+                f<<st.wDay<<"-"<<st.wMonth<<"-"<<st.wYear<<"-->"<<Z.tm_hour<<":"<<Z.tm_min<<endl;
+                break;
+            case 2:
+                f<<st.wDay<<"-"<<st.wMonth<<"-"<<st.wYear<<"-->"<<Z.tm_hour<<":"<<Z.tm_min<<endl<<endl<<endl;
+                break;
+            case 3:
+                exit = true;
+                break;
+            default:
+                cout << "Numar invalid, te rog sa recitesti meniul, si sa alegi unul dintre cele 3 numere: " << endl;
+                void flushCin();
+        }
+    } while (exit == false);
+
+    if(f.eof())
+{
+  fstream o;
+  o.open("ore.txt",ios::in);
+  int S=0,x;
+  while(o>>x)
+  {
+    S=S+x;
+  }
+cout<<"Luna trecuta ati muncit "<<S<<" ore.";
+o.close();
+o.open("ore.txt",ios::out);
+o<<0;
+
+o.close();
+}
+
+f.close();
+
+fstream o;
+o.open("ore.txt",ios::app);
+
+so=b-a;
+sm=d-c;
+o<<so<<":"<<sm<<endl;
+o.close();
+}
