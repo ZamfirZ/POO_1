@@ -1,0 +1,139 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <Windows.h>
+
+using namespace std;
+
+int main()
+{
+	int a = 0, b = 0, c = 0, d = 0, so, sm;
+	SYSTEMTIME st;
+	GetSystemTime(&st);
+
+	fstream f;
+
+	if (st.wMonth == 1)
+	{
+		f.open("Ianuarie.txt", ios::app);
+	}
+	if (st.wMonth == 2)
+	{
+		f.open("Februarie.txt", ios::app);
+	}
+	if (st.wMonth == 3)
+	{
+		f.open("Martie.txt", ios::app);
+	}
+	if (st.wMonth == 4)
+	{
+		f.open("Aprilie.txt", ios::app);
+	}
+	if (st.wMonth == 5)
+	{
+		f.open("Mai.txt", ios::app);
+	}
+	if (st.wMonth == 6)
+	{
+		f.open("Iunie.txt", ios::app);
+	}
+	if (st.wMonth == 7)
+	{
+		f.open("Iulie.txt", ios::app);
+	}
+	if (st.wMonth == 8)
+	{
+		f.open("August.txt", ios::app);
+	}
+	if (st.wMonth == 9)
+	{
+		f.open("Septembrie.txt", ios::app);
+	}
+	if (st.wMonth == 10)
+	{
+		f.open("Octombrie.txt", ios::app);
+	}
+	if (st.wMonth == 11)
+	{
+		f.open("Noiembrie.txt", ios::app);
+	}
+	if (st.wMonth == 12)
+	{
+		f.open("Decembrie.txt", ios::app);
+	}
+
+
+	int meniu;
+	bool exit = false;
+
+	cout << "NU OPRI PROGRAMUL PANA NU IESI DE LA MUNCA!" << endl;
+	cout << "Apasa unul din urmatoarele numere urmat de tasta Enter: " << endl;
+	cout << "1 - Daca ai ajuns acum." << endl;
+	cout << "2 - Daca pleci acum. " << endl;
+	cout << "3 - Iesire din program. " << endl;
+	cout << "NU OPRI PROGRAMUL PANA NU IESI DE LA MUNCA!" << endl;
+
+	do {
+
+		cin >> meniu;
+
+		if (meniu == 1)
+		{
+			GetSystemTime(&st);
+			a = st.wHour;
+			c = st.wMinute;
+		}
+		else
+		{
+			if (meniu == 2)
+			{
+				GetSystemTime(&st);
+				b = st.wHour;
+				d = st.wMinute;
+			}
+		}
+		switch (meniu) {
+		case 1:
+			GetLocalTime(&st);
+			f << st.wDay << "-" << st.wMonth << "-" << st.wYear << "-->" << st.wHour << ":" << st.wMinute << endl;
+			break;
+		case 2:
+			GetLocalTime(&st);
+			f << st.wDay << "-" << st.wMonth << "-" << st.wYear << "-->" << st.wHour << ":" << st.wMinute << endl << endl << endl;
+			break;
+		case 3:
+			exit = true;
+			break;
+		default:
+			cout << "Numar invalid, te rog sa recitesti meniul, si sa alegi unul dintre cele 3 numere: " << endl;
+			void flushCin();
+		}
+	} while (exit == false);
+
+	if (f.eof())
+	{
+		fstream o;
+		o.open("ore.txt", ios::in);
+		int S = 0, x;
+		while (o >> x)
+		{
+			S = S + x;
+		}
+		cout << "Luna trecuta ati muncit " << S << " ore.";
+		o.close();
+		o.open("ore.txt", ios::out);
+		o << 0;
+
+		o.close();
+	}
+
+	f.close();
+
+	fstream o;
+	o.open("ore.txt", ios::app);
+
+	so = b - a;
+	sm = d - c;
+	o << so << ":" << sm << endl;
+	o.close();
+}
